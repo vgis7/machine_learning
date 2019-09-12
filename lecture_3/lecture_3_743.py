@@ -19,13 +19,14 @@ classes = (mat_file["trn_x"], mat_file["trn_y"])
 train_x_class = mat_file["trn_x_class"]
 train_y_class = mat_file["trn_y_class"]
 
+"""
 data_normal = norm.rvs(size=1000,loc=0,scale=1)
 ax = sns.distplot(data_normal,
                   bins=100,
-                  kde=True,
                   color='skyblue',
                   hist_kws={"linewidth": 15,'alpha':1})
 ax.set(xlabel='Normal Distribution', ylabel='Frequency')
+"""
 
 def task_a():
     """
@@ -33,7 +34,11 @@ def task_a():
     """
     
     test_xy = mat_file["tst_xy"]
-    
+    pprint(mat_file["trn_x"][0:])
+    plt.scatter(mat_file["trn_x"][:,0],mat_file["trn_x"][:,1])
+    plt.scatter(mat_file["trn_y"][:,0],mat_file["trn_y"][:,1])
+    plt.show()
+
     #sns.scatterplot(x="x",y="y",data=sns.load_dataset(mat_file["trn_x"]))
 
 
