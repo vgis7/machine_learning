@@ -7,7 +7,6 @@
 
 from scipy.io import loadmat
 from scipy.stats import norm
-from scipy.stats import multivariate_normal as mvn
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,7 +19,6 @@ classes = (mat_file["trn_x"], mat_file["trn_y"])
 train_x_class = mat_file["trn_x_class"]
 train_y_class = mat_file["trn_y_class"]
 
-fig, ax = plt.subplots(1, 1)
 
 def task_a():
     """
@@ -29,29 +27,9 @@ def task_a():
     
     test_xy = mat_file["tst_xy"]
     pprint(mat_file["trn_x"][0:])
-    #plt.scatter(mat_file["trn_x"][:,0],mat_file["trn_x"][:,1])
-    #plt.scatter(mat_file["trn_y"][:,0],mat_file["trn_y"][:,1])
-    
-    #Standard div, mean and variance of x:
-    stdx = np.std(mat_file["trn_x"])
-    meanx = np.mean(mat_file["trn_x"])
-    variancex = np.var(mat_file["trn_x"])
-
-    #Standard div, mean and variance of y:
-    stdy = np.std(mat_file["trn_y"])
-    meany = np.mean(mat_file["trn_y"])
-    variancey = np.var(mat_file["trn_y"])
-
-    print(stdx)
-    print(meanx)
-    print(variancex)
-    print(stdy)
-    print(meany)
-    print(variancey)
-    
-    #mvn.pdf(test_xy,meanx,variancey)
-    
-    #plt.show()
+    plt.scatter(mat_file["trn_x"][:, 0], mat_file["trn_x"][:, 1])
+    plt.scatter(mat_file["trn_y"][:, 0], mat_file["trn_y"][:, 1])
+    plt.show()
 
     #sns.scatterplot(x="x",y="y",data=sns.load_dataset(mat_file["trn_x"]))
 
