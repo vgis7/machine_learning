@@ -49,12 +49,21 @@ def task_a():
     print(meany)
     print(variancey)
     
-    #mvn.pdf(test_xy,meanx,variancey)
+    hest = np.array(mat_file["trn_x"]).T
+
+    cov = np.cov(hest)
+    print(cov)
+    print(mat_file["trn_x"].shape)
+
+    print("Hest is:\t{}\ntrainx is:\t{}".format(hest.shape,mat_file["trn_x"].shape))
+
     
+    #multi = mvn.pdf(test_xy,0,cov)
+    #print(multi)
     #plt.show()
-
+    
     #sns.scatterplot(x="x",y="y",data=sns.load_dataset(mat_file["trn_x"]))
-
+    
 
 def task_b():
     """
