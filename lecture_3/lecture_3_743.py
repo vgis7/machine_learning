@@ -33,6 +33,7 @@ mean_C2 = (np.mean(train_y[:,0]),np.mean(train_y[:,1]))
 std_C1 = (np.std(train_x[:,0]),np.std(train_x[:,1]))
 std_C2 = (np.std(train_y[:,0]),np.std(train_y[:,1]))
 
+
 #Function to classify new data
 def classify(x,prior_C1_value,prior_C2_value):
   #Posterior = likelihood*prior. MATH: P(x|c1)*P(c1)
@@ -76,7 +77,6 @@ def task_a():
     accuracy_a = correct_counter/len(test_xy) #Calculates the accuracy of how many correct classifications that have been done
     print("Correct Predictions: {}. False Predictions: {}.".format(correct_counter,len(test_xy)-correct_counter))
     print("The accuracy is: {}%".format(round(accuracy_a,4)))
-
 
 def task_b():
     """
