@@ -1,13 +1,13 @@
 #!.venv/bin/python3
 #  ###################################
-# Group ID : 743
-# Members : Mathias Stougaard Lynge, Moaaz allahham,
-# Date : 11/9-2019
-# Lecture: 3  Parametric and nonparametric methods
-# Dependencies: Are all described in requirements.txt
+# Group ID      : 743
+# Members       : Mathias Stougaard Lynge, Moaaz allahham, Kasper Schøn Henriksen, Mikkel D.B. Jeppesen
+# Date          : 11-09-2019
+# Lecture       : 3  Parametric and nonparametric methods
+# Dependencies  : Are all described in requirements.txt
 # Python version: >3.5
-# Functionality: This script trains two likelyhood estimators on
-#                two classes of points, and then tests these on annotated test points
+# Functionality : This script trains two likelyhood estimators on
+#                 two classes of points, and then tests these on annotated test points
 # ###################################
 
 import matplotlib.pyplot as plt
