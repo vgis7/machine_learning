@@ -46,7 +46,7 @@ labels_df = collect_labels(labels_df,mat_file['train8'],8) #Collects labels for 
 
 #_______________SETUP DATASETS FOR TRAIN AND TEST__________________#
 train = np.concatenate((mat_file['train5'],mat_file['train6'],mat_file['train8'])) #Adds all three digits to one numpy array for the train dataset
-test = np.concatenate((mat_file['train5'],mat_file['train6'],mat_file['train8'])) #Adds all three digits to one numpy array for the test dataset
+test = np.concatenate((mat_file['test5'],mat_file['test6'],mat_file['test8'])) #Adds all three digits to one numpy array for the test dataset
 
 #________________________PRE-PROCESSING____________________________#
 print("[INFO]: Pre-Processing...")
