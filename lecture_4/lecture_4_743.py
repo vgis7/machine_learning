@@ -29,10 +29,10 @@ from sklearn.preprocessing import StandardScaler
 
 #________________________DATA COLLECTION__________________________#
 print("[INFO]: Setting up data...")
-def collect_labels(dataframe,mat_array,label): #dataframe = dataframe that contains all labels, mat_array = array from the mat file, label = is the label of the digit within the mat file
+def collect_labels(dataframe,mat_array,label,array_name): #dataframe = dataframe that contains all labels, mat_array = array from the mat file, label = is the label of the digit within the mat file
   temp_class_df = pd.DataFrame(columns=['Label']) #Temporary utilized for storing labels
 
-  for i in tqdm(range(len(mat_array)),desc=f'Collecting labels from mat_file[train{str(label)}]'): #Goes through as many indices as the length of the mat array
+  for i in tqdm(range(len(mat_array)),desc=f'Collecting labels from mat_file[{array_name}{str(label)}]'): #Goes through as many indices as the length of the mat array
     temp_class_df.at[i,'Label'] = label #Sets the label to the specific index, in column 'Label' of the temporary dataframe of labels
 
   dataframe = dataframe.append(temp_class_df,ignore_index=True) #The temporary dataset of labels is appended upon the dataset that contains all labels
@@ -40,14 +40,14 @@ def collect_labels(dataframe,mat_array,label): #dataframe = dataframe that conta
 
 mat_file = loadmat("data/mnist_all.mat") #Loading the mat file which includes the MNIST dataset
 train_labels_df = pd.DataFrame(columns=['Label']) #Declares pandas dataframe which contains train labels
-train_labels_df = collect_labels(train_labels_df,mat_file['train5'],5) #Collects labels for each digit 5 image and saves it in the train label dataframe
-train_labels_df = collect_labels(train_labels_df,mat_file['train6'],6) #Collects labels for each digit 6 image and saves it in the train label dataframe
-train_labels_df = collect_labels(train_labels_df,mat_file['train8'],8) #Collects labels for each digit 8 image and saves it in the train label dataframe
+train_labels_df = collect_labels(train_labels_df,mat_file['train5'],5, 'train') #Collects labels for each digit 5 image and saves it in the train label dataframe
+train_labels_df = collect_labels(train_labels_df,mat_file['train6'],6, 'train') #Collects labels for each digit 6 image and saves it in the train label dataframe
+train_labels_df = collect_labels(train_labels_df,mat_file['train8'],8, 'train') #Collects labels for each digit 8 image and saves it in the train label dataframe
 
 test_labels_df = pd.DataFrame(columns=['Label']) #Declares pandas dataframe which contains test labels
-test_labels_df = collect_labels(test_labels_df,mat_file['test5'],5) #Collects labels for each digit 8 image and saves it in the test label dataframe
-test_labels_df = collect_labels(test_labels_df,mat_file['test6'],6) #Collects labels for each digit 8 image and saves it in the test label dataframe
-test_labels_df = collect_labels(test_labels_df,mat_file['test8'],8) #Collects labels for each digit 8 image and saves it in the test label dataframe
+test_labels_df = collect_labels(test_labels_df,mat_file['test5'],5, 'test') #Collects labels for each digit 8 image and saves it in the test label dataframe
+test_labels_df = collect_labels(test_labels_df,mat_file['test6'],6, 'test') #Collects labels for each digit 8 image and saves it in the test label dataframe
+test_labels_df = collect_labels(test_labels_df,mat_file['test8'],8, 'test') #Collects labels for each digit 8 image and saves it in the test label dataframe
 
 #_______________SETUP DATASETS FOR TRAIN AND TEST__________________#
 train = np.concatenate((mat_file['train5'],mat_file['train6'],mat_file['train8'])) #Adds all three digits to one numpy array for the train dataset
