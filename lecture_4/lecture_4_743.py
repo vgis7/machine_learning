@@ -6,8 +6,8 @@
 # Lecture: 4  Dimensionality reduction
 # Dependencies  : Are all described in requirements.txt
 # Python version: >3.5
-# Functionality : This script trains two likelyhood estimators on
-#                 two classes of points, and then tests these on annotated test points
+# Functionality : This script uses PCA to reduce the 728 dimensional input data-set 
+#                 to 2 dimensions, after which it uses logistic regression to classify the test data
 # ###################################
 
 #5,6,8 <--
@@ -38,7 +38,7 @@ def collect_labels(dataframe,mat_array,label): #dataframe = dataframe that conta
   dataframe = dataframe.append(temp_class_df,ignore_index=True) #The temporary dataset of labels is appended upon the dataset that contains all labels
   return dataframe #Returns the dataset of labels
 
-mat_file = loadmat("mnist_all.mat") #Loading the mat file which includes the MNIST dataset
+mat_file = loadmat("data/mnist_all.mat") #Loading the mat file which includes the MNIST dataset
 train_labels_df = pd.DataFrame(columns=['Label']) #Declares pandas dataframe which contains train labels
 train_labels_df = collect_labels(train_labels_df,mat_file['train5'],5) #Collects labels for each digit 5 image and saves it in the train label dataframe
 train_labels_df = collect_labels(train_labels_df,mat_file['train6'],6) #Collects labels for each digit 6 image and saves it in the train label dataframe
@@ -55,7 +55,7 @@ test = np.concatenate((mat_file['test5'],mat_file['test6'],mat_file['test8'])) #
 
 #________________________PRE-PROCESSING____________________________#
 print("[INFO]: Pre-Processing...")
-scaler = StandardScaler() #Used for standardize features by removing scale and mean to unit variance
+scaler = StandardScaler() #Used for standardizing features by removing scale and mean to unit variance
 scaler.fit(train.astype(float)) #Computes mean and std which is only done using the train dataset
 train = scaler.transform(train.astype(float)) #Transforms the train dataset by utilzing the fited scaler
 test = scaler.transform(test.astype(float)) #Transforms the train dataset by utilzing the fited scaler
