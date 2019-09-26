@@ -6,7 +6,7 @@
 # Lecture: 4  Dimensionality reduction
 # Dependencies  : Are all described in requirements.txt
 # Python version: >3.5
-# Functionality : This script uses PCA to reduce the 728 dimensional input data-set 
+# Functionality : This script uses PCA to reduce the 728 dimensional input data-set
 #                 to 2 dimensions, after which it uses logistic regression to classify the test data
 # ###################################
 
@@ -109,5 +109,71 @@ ax.scatter(train[index_8_begin::,0],
            train[index_8_begin::,1],
            alpha=0.1,c='r',marker='$8$'
            )
+
+plt.show()
+
+#________________________________
+predictions_df = pd.DataFrame(columns=["Label"])
+predictions_df["Label"] = predictions
+
+ID5 = predictions_df.loc[predictions_df['Label']==5.0]
+ID6 = predictions_df.loc[predictions_df['Label']==6.0]
+ID8 = predictions_df.loc[predictions_df['Label']==8.0]
+
+five = []
+for id in ID5.index:
+  five.append(test[id])
+
+six = []
+for id in ID6.index:
+  six.append(test[id])
+
+eight = []
+for id in ID8.index:
+  eight.append(test[id])
+
+def sum_homemade(array):
+  sum_x = 0
+  for x in [p[0] for p in array]:
+    sum_x += x
+  sum_x = sum_x/len(array)
+
+  sum_y = 0
+  for y in [p[1] for p in array]:
+    sum_y += y
+  sum_y = sum_y/len(array)
+
+  mean = (sum_x,sum_y)
+
+  return mean
+
+five_mean = sum_homemade(five)
+six_mean = sum_homemade(six)
+eight_mean = sum_homemade(eight)
+
+fig, ax = plt.subplots()
+
+ax.scatter([p[0] for p in five],
+           [p[1] for p in five],
+           alpha=0.1,
+           c='b',marker='$5$'
+           )
+
+ax.scatter([p[0] for p in six],
+           [p[1] for p in six],
+           alpha=0.1,
+           c='r',marker='$6$'
+           )
+
+
+ax.scatter([p[0] for p in eight],
+           [p[1] for p in eight],
+           alpha = 0.1,
+           c='g',marker='$8$'
+           )
+
+ax.scatter(five_mean[0],five_mean[1],alpha=1,c='y')
+ax.scatter(six_mean[0],six_mean[1],alpha=1,c='y')
+ax.scatter(eight_mean[0],eight_mean[1],alpha=1,c='y')
 
 plt.show()
