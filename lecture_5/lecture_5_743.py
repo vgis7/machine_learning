@@ -13,13 +13,18 @@
 # models trained in the previous assignment, in terms of mean and variance values as well as through visualisation.
 from scipy.io import loadmat
 import numpy as np
+import matplotlib.pyplot as plt
 
+from sklearn.cluster import KMeans
 
 
 mat_file = loadmat("2D3classes.mat") #Loading the matfile with the 2d data for the 3 classes
 
-train = np.concatenate((mat_file['trn5'],mat_file['trn6'],mat_file['trn8'])) #Adds all three digits to one numpy array for the train dataset
+X = np.concatenate((mat_file['trn5'],mat_file['trn6'],mat_file['trn8'])) #Adds all three digits to one numpy array for the train dataset
 
-print(train.shape)
+kmean = KMeans(n_clusters=3)
+kmean.fit(X)
 
-print(mat_file)
+plt.scatter(X[:,0],X[:,1])
+plt.scatter(kmean.cluster_centers_[:,0],kmean.cluster_centers_[:,1])
+plt.show()
