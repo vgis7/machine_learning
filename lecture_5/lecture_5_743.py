@@ -1,7 +1,7 @@
 #  ###################################
 # Group ID : 743
 # Members : Mathias Stougaard Lynge, Moaaz allahham, Kasper Schøn Henriksen, Mikkel D.B. Jeppesen
-# Date : 18/9-2019
+# Date : 26/9-2019
 # Lecture: 5  Clustering
 # Dependencies  : Are all described in requirements.txt
 # Python version: >3.5
