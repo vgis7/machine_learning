@@ -13,6 +13,7 @@ from sklearn.decomposition import PCA
 from sklearn.linear_model import LinearRegression
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 #Load dataset train
 train = pd.read_csv("mnist_train.csv")
@@ -24,35 +25,58 @@ test = pd.read_csv("mnist_test.csv")
 testLabels = test['label']
 test.drop(columns=['label'])
 
-#Creates lda
-lda = LDA(n_components = 9)
+maximum_components = 10 #Goes from 2 to maximum_components for both LDA and PDA.
 
-#Fits and transforms the dataset by use of LDA
-ReducedTrainLDA = lda.fit_transform(train,trainLabels)
-ReducedTestLDA = lda.transform(test)
+def PredictWithLDA():
+    LDA_scores = []
+    for i in range(2,maximum_components):
 
-#Creates LinearRegression for to be used for the LDA
-lrLDA = LinearRegression()
+        #Creates lda
+        lda = LDA(n_components = i)
 
-#Fits data with Linear Regression:
-lrLDA.fit(ReducedTrainLDA,trainLabels)
+        #Fits and transforms the dataset by use of LDA
+        ReducedTrainLDA = lda.fit_transform(train,trainLabels)
+        ReducedTestLDA = lda.transform(test)
 
-#Predicts and checks the evaluates according to the labels
-score1 = lrLDA.score(ReducedTestLDA,testLabels)
-print("LDA score: " + str(score1))
+        #Creates LinearRegression for to be used for the LDA
+        lrLDA = LinearRegression()
 
-#Creates LinearRegression for to be used for the PCA
-lrPCA = LinearRegression()
+        #Fits data with Linear Regression:
+        lrLDA.fit(ReducedTrainLDA,trainLabels)
+
+        #Predicts and checks the evaluates according to the labels
+        score1 = lrLDA.score(ReducedTestLDA,testLabels)
+        print(f"LDA score with {i} components: " + str(score1))
+        LDA_scores.append(score1)
+    return LDA_scores
+
+def PredictWithPDA():
+    PDA_scores = []
+    for i in range(2,maximum_components):
+
+        #Creates LinearRegression for to be used for the PCA
+        lrPCA = LinearRegression()
 
 
-#Reduce data by PCA:
-pca = PCA(n_components = 9)
-trainReducedPCA = pca.fit_transform(train)
-testReducedPCA = pca.transform(test)
+        #Reduce data by PCA:
+        pca = PCA(n_components = i)
+        trainReducedPCA = pca.fit_transform(train)
+        testReducedPCA = pca.transform(test)
 
-#Fits data with Linear Regression:
-lrPCA.fit(trainReducedPCA, trainLabels)
+        #Fits data with Linear Regression:
+        lrPCA.fit(trainReducedPCA, trainLabels)
 
-#Predicts and checks the evaluates according to the labels
-score2 = lrPCA.score(testReducedPCA, testLabels)
-print("PCA score: "+ str(score2))
+        #Predicts and checks the evaluates according to the labels
+        score2 = lrPCA.score(testReducedPCA, testLabels)
+        print(f"PCA score with {i} components: "+ str(score2))
+        PDA_scores.append(score2)
+    return PDA_scores
+
+LDA_scores = PredictWithLDA()
+PDA_scores = PredictWithPDA()
+
+plt.scatter(range(2,maximum_components),LDA_scores,c = 'r')
+plt.plot(range(2,maximum_components),LDA_scores)
+plt.scatter(range(2,maximum_components),PDA_scores,c = "b")
+plt.plot(range(2,maximum_components),PDA_scores)
+plt.show()
