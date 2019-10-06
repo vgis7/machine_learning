@@ -25,7 +25,7 @@ test = pd.read_csv("mnist_test.csv")
 testLabels = test['label']
 test.drop(columns=['label'])
 
-maximum_components = 10 #Goes from 2 to maximum_components for both LDA and PDA.
+maximum_components = 10 #Goes from 2 to maximum_components for both LDA and PCA.
 
 def PredictWithLDA():
     LDA_scores = []
@@ -50,8 +50,8 @@ def PredictWithLDA():
         LDA_scores.append(score1)
     return LDA_scores
 
-def PredictWithPDA():
-    PDA_scores = []
+def PredictWithPCA():
+    PCA_scores = []
     for i in range(2,maximum_components):
 
         #Creates LinearRegression for to be used for the PCA
@@ -69,14 +69,14 @@ def PredictWithPDA():
         #Predicts and checks the evaluates according to the labels
         score2 = lrPCA.score(testReducedPCA, testLabels)
         print(f"PCA score with {i} components: "+ str(score2))
-        PDA_scores.append(score2)
-    return PDA_scores
+        PCA_scores.append(score2)
+    return PCA_scores
 
 LDA_scores = PredictWithLDA()
-PDA_scores = PredictWithPDA()
+PCA_scores = PredictWithPCA()
 
 plt.scatter(range(2,maximum_components),LDA_scores,c = 'r')
 plt.plot(range(2,maximum_components),LDA_scores)
-plt.scatter(range(2,maximum_components),PDA_scores,c = "b")
-plt.plot(range(2,maximum_components),PDA_scores)
+plt.scatter(range(2,maximum_components),PCA_scores,c = "b")
+plt.plot(range(2,maximum_components),PCA_scores)
 plt.show()
