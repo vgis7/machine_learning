@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 
 #Load dataset train
-train = pd.read_csv("mnist_train.csv")
+train = pd.read_csv("../mnist_train.csv")
 trainLabels = train['label']
 train.drop(columns=['label'])
 
