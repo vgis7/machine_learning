@@ -16,12 +16,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 #Load dataset train
-train = pd.read_csv("mnist_train.csv")
+train = pd.read_csv("../data/mnist_train.csv")
 trainLabels = train['label']
 train.drop(columns=['label'])
 
 #Load dataset test
-test = pd.read_csv("mnist_test.csv")
+test = pd.read_csv("../data/mnist_test.csv")
 testLabels = test['label']
 test.drop(columns=['label'])
 
@@ -57,7 +57,6 @@ def PredictWithPCA():
         #Creates LinearRegression for to be used for the PCA
         lrPCA = LinearRegression()
 
-
         #Reduce data by PCA:
         pca = PCA(n_components = i)
         trainReducedPCA = pca.fit_transform(train)
@@ -80,3 +79,4 @@ plt.plot(range(2,maximum_components),LDA_scores)
 plt.scatter(range(2,maximum_components),PCA_scores,c = "b")
 plt.plot(range(2,maximum_components),PCA_scores)
 plt.show()
+
