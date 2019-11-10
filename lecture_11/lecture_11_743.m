@@ -20,4 +20,4 @@ recovered = restore_image(blurred, 100, 2000, 0.02, 3);
 disp("Saving recovered.png");
 imwrite(recovered, "recovered.png");
 
-disp(sum(blurred - recovered, 'all'));
+disp("Done")
