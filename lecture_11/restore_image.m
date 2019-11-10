@@ -76,8 +76,6 @@ for i = 1 : iterations
             buffer(r,c,d) = min_val;
         end
     end
-
-    i
 end
 
 dst = buffer(:,:,d);
