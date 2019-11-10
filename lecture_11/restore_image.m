@@ -33,12 +33,8 @@ for i = 1 : iterations
     % Vary each pixel individually to find the
     % values that minimise the local potentials.
     for r = 1 : size(src,1)
+        fprintf('iteration: %d/%d\n\tpixel: (%d,%d)\n', i, iterations, r, c);
         for c = 1 : size(src,2)
-            
-            if mod(c, 500) == 0
-                fprintf('iteration: %d/%d\n\tpixel: (%d,%d)\n', i, iterations, r, c);
-            end
-            
             V_local = V_max;
             min_val = -1;
             for val = 0 : 255
