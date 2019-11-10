@@ -1,16 +1,23 @@
+disp("Opening Image");
 I = imread('img.jpg');
 
 if size(I,3)==3
-        I = rgb2gray(I);
-        imwrite(I, 'source.png');
+    disp("Converting to greyscale");
+    I = rgb2gray(I);
+    imwrite(I, 'source.png');
 end
 
+disp("Blurring");
 blurred = arrayfun(@(z) uint8(blur_image(double(z), 100)), I);
 
+disp("Saving blurred.png");
 imwrite(blurred, "blurred.png");
 
-recovered = arrayfun(@(z) uint8(restore_image(double(z), 100, 2000, 0.02, 10)), blurred);
 
+disp("recovering");
+recovered = arrayfun(@(z) restore_image(z, 100, 2000, 0.02, 10), blurred);
+
+disp("Saving recovered.png");
 imwrite(recovered, "recovered.png");
 
 disp(sum(blurred - recovered, 'all'));
