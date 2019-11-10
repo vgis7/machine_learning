@@ -8,14 +8,14 @@ if size(I,3)==3
 end
 
 disp("Blurring");
-blurred = arrayfun(@(z) uint8(blur_image(double(z), 100)), I);
+%blurred = arrayfun(@(z) uint8(blur_image(double(z), 100)), I);
 
 disp("Saving blurred.png");
 imwrite(blurred, "blurred.png");
 
 
 disp("recovering");
-recovered = arrayfun(@(z) restore_image(z, 100, 2000, 0.02, 10), blurred);
+recovered = restore_image(blurred, 100, 2000, 0.02, 10);
 
 disp("Saving recovered.png");
 imwrite(recovered, "recovered.png");

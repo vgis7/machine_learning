@@ -7,7 +7,6 @@
 % * iterations is the number of iterations to perform.
 
 function dst = restore_image(src, covar, max_diff, weight_diff, iterations)
-
 % Maintain two buffer images.
 % In alternate iterations, one will be the
 % source image, the other the destination.
@@ -22,7 +21,6 @@ V_max = (size(src,1) * size(src,2)) * ...
         ((256)^2 / (2*covar) + 4 * weight_diff * max_diff);
 
 for i = 1 : iterations
-
     % Switch source and destination buffers.
     if s == 1
         s = 2;
@@ -36,7 +34,11 @@ for i = 1 : iterations
     % values that minimise the local potentials.
     for r = 1 : size(src,1)
         for c = 1 : size(src,2)
-
+            
+            if mod(c, 500) == 0
+                fprintf('iteration: %d/%d\n\tpixel: (%d,%d)\n', i, iterations, r, c);
+            end
+            
             V_local = V_max;
             min_val = -1;
             for val = 0 : 255
