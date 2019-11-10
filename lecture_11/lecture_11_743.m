@@ -15,7 +15,7 @@ imwrite(blurred, "blurred.png");
 
 
 disp("recovering");
-recovered = restore_image(blurred, 100, 2000, 0.02, 10);
+recovered = restore_image(blurred, 100, 2000, 0.02, 3);
 
 disp("Saving recovered.png");
 imwrite(recovered, "recovered.png");
